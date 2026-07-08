@@ -1,0 +1,24 @@
+name: Generate README
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate README
+        uses: snehajain16/repo-doc-agent@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          output_path: README.md
+          model: claude-sonnet-5
+          commit_message: "docs: auto-update README"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
