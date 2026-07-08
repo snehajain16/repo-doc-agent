@@ -56,10 +56,10 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/repo-explorer`
 **Depends on:** T-02, T-03
 
-- [ ] Create `TOOLS_SCHEMA` list (Anthropic tool definitions) in `tools.py`
-- [ ] Create `dispatch_tool(name, args, repo_root) -> str` function
-- [ ] Wire `dispatch_tool` into `ReadmeAgent.generate()` loop
-- [ ] Integration test: run agent against `tests/fixtures/python-fastapi/` fixture, assert `ReadmeData.project_name` is correct
+- [x] Create `TOOLS_SCHEMA` list (Anthropic tool definitions) in `tools.py`
+- [x] Create `dispatch_tool(name, args, repo_root) -> str` function
+- [x] Wire `dispatch_tool` into `ReadmeAgent.generate()` loop
+- [x] Integration test: run agent against `tests/fixtures/python-fastapi/` fixture, assert `ReadmeData.project_name` is correct
 
 **Done when:** integration test passes with mocked Claude but real tools.
 
@@ -95,12 +95,12 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/cli`
 **Depends on:** T-02, T-06
 
-- [ ] Create `readme_agent/cli.py` with `click` group and `generate` command
-- [ ] Flags: `--repo-path` (default `.`), `--output` (default `README.md`), `--model`, `--verbose`, `--force`, `--json`
-- [ ] `--verbose` wires `rich` logging of each tool call to stderr
-- [ ] Prompt for confirmation if output file exists and `--force` not set
-- [ ] `--json` prints `ReadmeData` as JSON to stdout instead of writing file
-- [ ] CLI integration test: invoke via `click.testing.CliRunner` against fixture repo
+- [x] Create `readme_agent/cli.py` with `click` group and `generate` command
+- [x] Flags: `--repo-path` (default `.`), `--output` (default `README.md`), `--model`, `--verbose`, `--force`, `--json`
+- [x] `--verbose` wires `rich` logging of each tool call to stderr
+- [x] Prompt for confirmation if output file exists and `--force` not set
+- [x] `--json` prints `ReadmeData` as JSON to stdout instead of writing file
+- [x] CLI integration test: invoke via `click.testing.CliRunner` against fixture repo
 
 **Done when:** CLI integration test passes.
 
@@ -110,11 +110,11 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/github-action`
 **Depends on:** T-06
 
-- [ ] Create `readme_agent/github_writer.py`
-- [ ] Implement `commit_readme(content: str, repo: str, path: str, token: str, branch: str)`
-- [ ] Uses `PyGithub` to create or update file via GitHub API
-- [ ] Skips commit if content is identical to existing file (idempotency)
-- [ ] Unit test with mocked `PyGithub`
+- [x] Create `readme_agent/github_writer.py`
+- [x] Implement `commit_readme(content: str, repo: str, path: str, token: str, branch: str)`
+- [x] Uses `PyGithub` to create or update file via GitHub API
+- [x] Skips commit if content is identical to existing file (idempotency)
+- [x] Unit test with mocked `PyGithub`
 
 **Done when:** unit test passes, idempotency case covered.
 
