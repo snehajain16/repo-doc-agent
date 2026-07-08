@@ -88,3 +88,10 @@ class ReadmeAgent:
                 })
 
             messages.append({"role": "user", "content": tool_results})
+
+
+def run(repo_path: Path, model: str = "claude-sonnet-5", verbose: bool = False) -> ReadmeData:
+    """Top-level convenience function: create agent, wire tools, generate README data."""
+    from .tools import TOOLS_SCHEMA, dispatch_tool
+    agent = ReadmeAgent(model=model, verbose=verbose)
+    return agent.generate(repo_path, TOOLS_SCHEMA, dispatch_tool)
