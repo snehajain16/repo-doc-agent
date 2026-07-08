@@ -2,6 +2,8 @@ import re
 import json
 from pathlib import Path
 
+from anthropic.types import ToolParam
+
 
 def _safe_path(path: str, repo_root: Path) -> Path:
     """Resolve path and verify it stays within repo_root. Raises ValueError if traversal detected."""
@@ -181,7 +183,7 @@ def read_dependency_file(repo_root: Path) -> dict:
 
 
 # Anthropic tool schema definitions
-TOOLS_SCHEMA = [
+TOOLS_SCHEMA: list[ToolParam] = [
     {
         "name": "list_files",
         "description": "List files and directories at the given path within the repository. Use '.' for root.",
