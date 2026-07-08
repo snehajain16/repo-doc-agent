@@ -9,12 +9,12 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/agent-core`
 **Depends on:** nothing
 
-- [ ] Initialise `pyproject.toml` with `uv` (`name`, `version`, `dependencies`, `scripts`)
-- [ ] Add runtime deps: `anthropic`, `click`, `rich`, `jinja2`, `pydantic`, `PyGithub`
-- [ ] Add dev deps: `pytest`, `pytest-mock`, `ruff`, `mypy`
-- [ ] Create `readme_agent/__init__.py` with version constant
-- [ ] Create `.github/workflows/ci.yml` — runs `pytest` + `ruff` + `mypy` on push
-- [ ] Add `.gitignore` for Python
+- [x] Initialise `pyproject.toml` with `uv` (`name`, `version`, `dependencies`, `scripts`)
+- [x] Add runtime deps: `anthropic`, `click`, `rich`, `jinja2`, `pydantic`, `PyGithub`
+- [x] Add dev deps: `pytest`, `pytest-mock`, `ruff`, `mypy`
+- [x] Create `readme_agent/__init__.py` with version constant
+- [x] Create `.github/workflows/ci.yml` — runs `pytest` + `ruff` + `mypy` on push
+- [x] Add `.gitignore` for Python
 
 **Done when:** `uv run pytest` exits 0 (no tests yet, just collection passes).
 
@@ -24,13 +24,13 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/agent-core`
 **Depends on:** T-01
 
-- [ ] Create `readme_agent/agent.py` with `ReadmeAgent` class
-- [ ] Implement `generate(repo_path: Path) -> ReadmeData` method
-- [ ] Write system prompt with tool list, README structure, accuracy instructions
-- [ ] Implement tool-use `while` loop using `anthropic` SDK
-- [ ] Handle `max_tool_calls=20` safety limit
-- [ ] Parse Claude's final JSON response into `ReadmeData`
-- [ ] Unit test: mock Anthropic client, assert loop terminates and returns `ReadmeData`
+- [x] Create `readme_agent/agent.py` with `ReadmeAgent` class
+- [x] Implement `generate(repo_path: Path) -> ReadmeData` method
+- [x] Write system prompt with tool list, README structure, accuracy instructions
+- [x] Implement tool-use `while` loop using `anthropic` SDK
+- [x] Handle `max_tool_calls=20` safety limit
+- [x] Parse Claude's final JSON response into `ReadmeData`
+- [x] Unit test: mock Anthropic client, assert loop terminates and returns `ReadmeData`
 
 **Done when:** unit test passes with mocked Claude responses.
 
