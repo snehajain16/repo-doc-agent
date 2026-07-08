@@ -138,11 +138,11 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/tests`
 **Depends on:** T-01 through T-09
 
-- [ ] Create fixture repos in `tests/fixtures/`: `python-fastapi/`, `node-react/`, `go-cli/`
-- [ ] Full integration test for each fixture: mock Claude, run full pipeline, assert README sections
-- [ ] Add `pytest-cov` and enforce 80% coverage gate in CI
-- [ ] Add `ruff` lint check to CI
-- [ ] Add `mypy` type check to CI
+- [x] Create fixture repos in `tests/fixtures/`: `python-fastapi/`, `node-react/`, `go-cli/`
+- [x] Full integration test for each fixture: mock Claude, run full pipeline, assert README sections
+- [x] Add `pytest-cov` and enforce 80% coverage gate in CI
+- [x] Add `ruff` lint check to CI
+- [x] Add `mypy` type check to CI
 - [ ] Document test-running instructions in `CONTRIBUTING.md`
 
 **Done when:** CI passes on all three fixture repos.
