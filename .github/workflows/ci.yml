@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+      - run: uv sync --dev
+      - run: uv run pytest --cov=readme_agent --cov-report=term-missing
+      - run: uv run ruff check .
+      - run: uv run mypy readme_agent/

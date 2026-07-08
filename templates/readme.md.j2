@@ -1,0 +1,69 @@
+# {{ data.project_name }}
+
+{{ data.description }}
+{% if data.badges %}
+
+{% for badge in data.badges %}
+[![{{ badge.label }}]({{ badge.url }})]({{ badge.url }})
+{% endfor %}
+{% endif %}
+{% if data.features %}
+
+## Features
+
+{% for feature in data.features %}
+- {{ feature }}
+{% endfor %}
+{% endif %}
+{% if data.prerequisites %}
+
+## Prerequisites
+
+{% for prereq in data.prerequisites %}
+- {{ prereq }}
+{% endfor %}
+{% endif %}
+{% if data.installation %}
+
+## Installation
+
+{% set ns = namespace(i=1) %}
+{% for step in data.installation %}
+{{ ns.i }}. {{ step }}
+{% set ns.i = ns.i + 1 %}
+{% endfor %}
+{% endif %}
+{% if data.usage_examples %}
+
+## Usage
+
+{% for example in data.usage_examples %}
+{{ example.description }}
+
+```{{ example.language }}
+{{ example.code }}
+```
+{% endfor %}
+{% endif %}
+{% if data.configuration %}
+
+## Configuration
+
+| Variable | Description | Default | Required |
+|---|---|---|---|
+{% for item in data.configuration %}
+| `{{ item.name }}` | {{ item.description }} | {{ item.default or "—" }} | {{ "Yes" if item.required else "No" }} |
+{% endfor %}
+{% endif %}
+{% if data.contributing %}
+
+## Contributing
+
+{{ data.contributing }}
+{% endif %}
+{% if data.license %}
+
+## License
+
+{{ data.license }}
+{% endif %}
