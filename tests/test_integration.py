@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock
 
-import pytest
 
 from readme_agent.agent import ReadmeAgent
 from readme_agent.models import ReadmeData
@@ -88,3 +87,40 @@ def test_dispatch_tool_read_dependency_file_on_fixture():
     result = dispatch_tool("read_dependency_file", {}, FIXTURE_PATH)
     assert "requirements.txt" in result
     assert any("fastapi" in dep.lower() for dep in result["requirements.txt"])
+
+
+# ── Node/React fixture ────────────────────────────────────────────────────────
+
+NODE_FIXTURE_PATH = Path(__file__).parent / "fixtures" / "node-react"
+GO_FIXTURE_PATH = Path(__file__).parent / "fixtures" / "go-cli"
+
+
+def test_detect_language_node_react():
+    result = dispatch_tool("detect_language", {}, NODE_FIXTURE_PATH)
+    assert result["primary"] in ("TypeScript", "JavaScript")
+
+
+def test_read_dependency_file_node_react():
+    result = dispatch_tool("read_dependency_file", {}, NODE_FIXTURE_PATH)
+    assert "package.json" in result
+    assert "react" in result["package.json"]["dependencies"]
+
+
+def test_list_files_node_react():
+    result = dispatch_tool("list_files", {"path": "."}, NODE_FIXTURE_PATH)
+    assert any("package.json" in f for f in result)
+
+
+def test_detect_language_go_cli():
+    result = dispatch_tool("detect_language", {}, GO_FIXTURE_PATH)
+    assert result["primary"] == "Go"
+
+
+def test_read_dependency_file_go_cli():
+    result = dispatch_tool("read_dependency_file", {}, GO_FIXTURE_PATH)
+    assert "go.mod" in result
+
+
+def test_read_file_go_main():
+    result = dispatch_tool("read_file", {"path": "main.go"}, GO_FIXTURE_PATH)
+    assert "func main" in result
