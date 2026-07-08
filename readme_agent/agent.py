@@ -1,7 +1,9 @@
+import sys
 from pathlib import Path
 from typing import Any
 
 import anthropic
+from anthropic.types import MessageParam, ToolParam
 
 from .models import ReadmeData
 
@@ -39,8 +41,8 @@ class ReadmeAgent:
         self.verbose = verbose
         self.client = anthropic.Anthropic()
 
-    def generate(self, repo_path: Path, tools_schema: list[dict], dispatch_fn: Any) -> ReadmeData:
-        messages: list[dict] = []
+    def generate(self, repo_path: Path, tools_schema: list[ToolParam], dispatch_fn: Any) -> ReadmeData:
+        messages: list[MessageParam] = []
         tool_calls = 0
         max_tool_calls = 20
 
@@ -57,14 +59,12 @@ class ReadmeAgent:
             )
 
             if self.verbose:
-                import sys
                 print(f"[agent] stop_reason={response.stop_reason}", file=sys.stderr)
 
             assistant_content = response.content
             messages.append({"role": "assistant", "content": assistant_content})
 
             if response.stop_reason == "end_turn":
-                # Extract final text response
                 for block in assistant_content:
                     if hasattr(block, "text"):
                         return ReadmeData.model_validate_json(block.text)
@@ -73,14 +73,12 @@ class ReadmeAgent:
             if response.stop_reason != "tool_use" or tool_calls >= max_tool_calls:
                 raise ValueError(f"Unexpected stop: {response.stop_reason}, tool_calls={tool_calls}")
 
-            # Process tool calls
-            tool_results = []
+            tool_results: list[Any] = []
             for block in assistant_content:
                 if block.type != "tool_use":
                     continue
                 tool_calls += 1
                 if self.verbose:
-                    import sys
                     print(f"[tool] {block.name}({block.input})", file=sys.stderr)
                 result = dispatch_fn(block.name, block.input, repo_path)
                 tool_results.append({
