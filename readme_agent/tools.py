@@ -104,7 +104,7 @@ def detect_language(repo_root: Path) -> dict:
             lang_counts[lang] = lang_counts.get(lang, 0) + count
 
     primary = max(lang_counts, key=lambda k: lang_counts[k]) if lang_counts else "Unknown"
-    others = [l for l in lang_counts if l != primary]
+    others = [lang for lang in lang_counts if lang != primary]
 
     # Detect frameworks
     frameworks = []
@@ -141,7 +141,7 @@ def read_dependency_file(repo_root: Path) -> dict:
     # Python - requirements.txt
     req_txt = repo_root / "requirements.txt"
     if req_txt.exists():
-        deps = [l.strip() for l in req_txt.read_text().splitlines() if l.strip() and not l.startswith("#")]
+        deps = [line.strip() for line in req_txt.read_text().splitlines() if line.strip() and not line.startswith("#")]
         result["requirements.txt"] = deps
 
     # Python - pyproject.toml (basic parse)

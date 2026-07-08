@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from readme_agent.models import ReadmeData, UsageExample, ConfigItem, Badge
+from readme_agent.models import ReadmeData, UsageExample, ConfigItem
 
 
 def test_readme_data_minimal():
