@@ -1,0 +1,28 @@
+name: README AI Agent
+description: Automatically generate an accurate README for your repository using Claude AI.
+author: snehajain16
+
+inputs:
+  anthropic_api_key:
+    description: Anthropic API key for Claude
+    required: true
+  output_path:
+    description: Path to write the README
+    required: false
+    default: README.md
+  model:
+    description: Claude model to use
+    required: false
+    default: claude-sonnet-5
+  commit_message:
+    description: Git commit message for the README update
+    required: false
+    default: "docs: update README via readme-ai-agent"
+
+runs:
+  using: docker
+  image: Dockerfile
+
+branding:
+  icon: book-open
+  color: purple

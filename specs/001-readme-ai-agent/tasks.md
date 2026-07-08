@@ -124,11 +124,11 @@ Tasks are dependency-ordered. Each maps to a feature branch. Complete T-01 befor
 **Branch:** `feature/github-action`
 **Depends on:** T-07, T-08
 
-- [ ] Create `action.yml` with inputs: `anthropic_api_key` (required), `output_path`, `model`, `commit_message`
-- [ ] Action runs `readme-agent generate` and calls `github_writer.commit_readme`
-- [ ] Create `Dockerfile` for the action (python:3.11-slim base)
-- [ ] Test action locally using `act` (document in `CONTRIBUTING.md`)
-- [ ] Add workflow `examples/demo.yml` showing how to use the action
+- [x] Create `action.yml` with inputs: `anthropic_api_key` (required), `output_path`, `model`, `commit_message`
+- [x] Action runs `readme-agent generate` and calls `github_writer.commit_readme`
+- [x] Create `Dockerfile` for the action (python:3.11-slim base)
+- [x] Test action locally using `act` (document in `CONTRIBUTING.md`)
+- [x] Add workflow `examples/demo.yml` showing how to use the action
 
 **Done when:** `action.yml` is valid, Dockerfile builds, demo workflow exists.
 
